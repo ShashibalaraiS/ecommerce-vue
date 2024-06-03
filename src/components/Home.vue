@@ -3,6 +3,7 @@
     <h1>Product List</h1>
   </div>
   <button className="checkout-button" @click="goToCart">Checkout ({{ showVal }}) items</button>
+  <div class="span-err" v-if="err">Please add atleast 1 product to continue</div>
   <div className="product-container">
     <div v-for="product in products" :key="product.id" className="product-card">
       <h2>{{ product.name }}</h2>
@@ -22,7 +23,8 @@ export default {
   data() {
     return {
       products: [],
-      Num: 0
+      Num: 0,
+      err:false
     };
   },
   created() {
@@ -43,7 +45,14 @@ export default {
       this.$store.dispatch("getProductDetail", productId);
     },
     goToCart() {
-      this.$router.push({ name: 'CheckoutView' });
+      if(this.showVal >0){
+        this.err = false
+        this.$router.push({ name: 'CheckoutView' });
+      }else{
+        this.err = true;
+        return
+      }
+      
     }
 
   },
