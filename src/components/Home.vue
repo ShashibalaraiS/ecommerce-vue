@@ -41,8 +41,10 @@ export default {
           console.log('There was an error:', error.response);
         });
     },
-    addToCart(productId) {
+    addToCart(productId) {      
       this.$store.dispatch("getProductDetail", productId);
+        this.err = false
+      
     },
     goToCart() {
       if(this.showVal >0){
