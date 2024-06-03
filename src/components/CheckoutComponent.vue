@@ -43,9 +43,9 @@ export default {
         data: this.$store.state.selectedUserData
 
       });
-      console.log("result", result)
       if (result.status == 201) {
         alert(result.data.message)
+        this.$router.push({ name: 'Home' })
       }
 
     },
@@ -63,6 +63,9 @@ export default {
       return this.$store.state.selectedUserData ? this.$store.state.selectedUserData : ''
 
     }
+  },
+  beforeUnmount() {
+    this.$store.dispatch("clearSelectedUserData");
   }
 };
 </script>

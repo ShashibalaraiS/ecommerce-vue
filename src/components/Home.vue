@@ -40,10 +40,6 @@ export default {
         });
     },
     addToCart(productId) {
-      console.log("productid", productId)
-      //this.getProductDetail(productId)
-      // this.$router.push({ name: 'CheckoutView' });
-      console.log("userdata", this.$store.state.selectedUserData)
       this.$store.dispatch("getProductDetail", productId);
     },
     goToCart() {
@@ -56,7 +52,8 @@ export default {
       return this.$store.state.selectedUserData ? this.$store.state.selectedUserData.length : '0'
 
     }
-  }
+  }, 
+  
 }
 </script>
 

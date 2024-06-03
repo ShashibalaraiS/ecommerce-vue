@@ -7,24 +7,27 @@ export default createStore({
     },
     mutations:{
         addToSelectedUserData(state, newData) {
-            console.log("Adding data:", newData);
-            // Ensure newData is an object before pushing it to the array
             if (Array.isArray(state.selectedUserData)) {
                 state.selectedUserData.push(newData);
             } else {
                 console.error('selectedUserData is not an array:', state.selectedUserData);
             }
         },
+        clearSelectedUserData(state) {
+            state.selectedUserData = [];
+          }
     },
     actions:{
         getProductDetail({ commit }, id) {
             apiService.getProductwithId(id).then(res => {
-                console.log("API Response:", res); // Log the response to check its format
-                commit("addToSelectedUserData", res.data); // Assuming res.data is the object you want to add
+                commit("addToSelectedUserData", res.data);
             }).catch(error => {
                 console.error("Error fetching product:", error);
             });
         },
+        clearSelectedUserData({ commit }) {
+            commit("clearSelectedUserData");
+          }
     }, 
     plugins: [
         createPersistedState({ storage: window.sessionStorage })
